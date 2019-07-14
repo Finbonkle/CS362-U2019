@@ -29,6 +29,66 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+# Assignment 3 tests are executed here:
+
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c dominion.o
+	echo "unittest1.c:" >> unittestresults.out
+	gcc -o unittest1 -g unittest1.c dominion.c rngs.c $(CFLAGS)
+	./unittest1 >> unittestresults.out
+	gcc -o unittest2 -g unittest2.c dominion.c rngs.c $(CFLAGS)
+	./unittest2 >> unittestresults.out
+	gcc -o unittest3 -g unittest3.c dominion.c rngs.c $(CFLAGS)
+	./unittest3 >> unittestresults.out
+	gcc -o unittest4 -g unittest4.c dominion.c rngs.c $(CFLAGS)
+	./unittest4 >> unittestresults.out
+	gcc -o unittest5 -g unittest5.c dominion.c rngs.c $(CFLAGS)
+	./unittest5 >> unittestresults.out
+	gcov dominion.c -b >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+
+unittest1: unittest1.c dominion.o rngs.o
+	gcc -o unittest1 -g unittest1.c dominion.c rngs.o $(CFLAGS)
+	./unittest1
+
+unittest2: unittest2.c dominion.o rngs.o
+	gcc -o unittest2 -g unittest2.c dominion.c rngs.c $(CFLAGS)
+	./unittest2
+
+unittest3: unittest3.c dominion.o rngs.o
+	gcc -o unittest3 -g unittest3.c dominion.c rngs.c $(CFLAGS)
+	./unittest3
+
+unittest4: unittest4.c dominion.o rngs.o
+	gcc -o unittest4 -g unittest4.c dominion.c rngs.c $(CFLAGS)
+	./unittest4
+
+unittest5: unittest5.c dominion.o rngs.o
+	gcc -o unittest5 -g unittest5.c dominion.c rngs.c $(CFLAGS)
+	./unittest5
+
+cardtest1: cardtest1.c dominion.o rngs.o
+	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	./cardtest1
+
+cardtest2: cardtest2.c dominion.o rngs.o
+	gcc -o cardtest2 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	./cardtest2
+
+cardtest3: cardtest3.c dominion.o rngs.o
+	gcc -o cardtest3 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	./cardtest3
+
+cardtest4: cardtest5.c dominion.o rngs.o
+	gcc -o cardtest4 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	./cardtest4
+
+cardtest5: cardtest5.c dominion.o rngs.o
+	gcc -o cardtest5 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	./cardtest5
+
+example_cardtest4: example_cardtest4.c dominion.o rngs.o
+	gcc -o example_cardtest4 -g  example_cardtest4.c dominion.o rngs.o $(CFLAGS)
+	./example_cardtest4
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
