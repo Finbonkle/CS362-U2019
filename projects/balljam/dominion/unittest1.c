@@ -14,14 +14,7 @@
 #define TESTCARD "baron"
 
 int main() {
-  int newCards = 0;
-  int discarded = 1;
-  int xtraCoins = 0;
-  int shuffledCards = 0;
-
-  int i, j, m;
   int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
-  int remove1, remove2;
   int seed = 1000;
   int numPlayers = 2;
   int thisPlayer = 0;
