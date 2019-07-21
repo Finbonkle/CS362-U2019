@@ -28,7 +28,6 @@ int main() {
   struct gameState G, testG;
   int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy, council_room};
-  int currentPlayer = whoseTurn(&G);
   
   // initialize a game state and player cards
   initializeGame(numPlayers, k, seed, &G);
@@ -103,7 +102,7 @@ int main() {
   */
     printf(" - and there are %d estate card(s) in the supply\n", testG.supplyCount[estate]);
   // check that the player has gained an estate
-  if(testG.handCount[currentPlayer] == G.handCount[currentPlayer] + 1 && testG.supplyCount[estate] == G.supplyCount[estate] - 1)
+  if(testG.handCount[thisPlayer] == G.handCount[thisPlayer] + 1 && testG.supplyCount[estate] == G.supplyCount[estate] - 1)
     printf(" - Passed, player has gained an estate from supply\n");
   else
     printf(" - Failed, player did not gain an estate from supply\n");
