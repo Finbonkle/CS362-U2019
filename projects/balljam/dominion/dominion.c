@@ -676,7 +676,8 @@ int ce_Baron(int choice1, struct gameState* state)
 	  printf("Must gain an estate if there are any\n");
 	}
 	// ADDED BUG -- should be > 0 not >= 0 
-	if (supplyCount(estate, state) >= 0) {
+	// patched bug for assignment 4
+	if (supplyCount(estate, state) > 0) {
 	  gainCard(estate, state, 0, currentPlayer);
 	  state->supplyCount[estate]--;//Decrement estates
 	  if (supplyCount(estate, state) == 0) {
@@ -724,12 +725,13 @@ int ce_Minion(int choice1, int choice2, struct gameState* state, int handPos)
 
 
   // ADDED BUG -- choice1 and choice2 are swapped
-  if (choice2)		//+2 coins
+  // patched bug for assignment 4
+  if (choice1)		//+2 coins
     {
       state->coins = state->coins + 2;
     }
   
-  else if (choice1)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
+  else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
       //discard hand
       while (numHandCards(state) > 0)
@@ -758,7 +760,8 @@ int ce_Minion(int choice1, int choice2, struct gameState* state, int handPos)
 		  
 		  //draw 4
 		  // ADDED BUG -- should be < 4 not <= 4
-		  for (j = 0; j <= 4; j++)
+		  // patched bug for assignment 4
+		  for (j = 0; j < 4; j++)
 		    {
 		      drawCard(i, state);
 		    }
