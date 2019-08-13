@@ -15,7 +15,15 @@
  * limitations under the License.
  */
 
+/******************************************
+ *  Citations
+ *  https://www.journaldev.com/709/java-read-file-line-by-line
+ *****************************************/
+
 import junit.framework.TestCase;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Performs Validation Test for url validations.
@@ -36,6 +44,59 @@ protected void setUp() {
       for (int index = 0; index < testPartsIndex.length - 1; index++) {
          testPartsIndex[index] = 0;
       }
+   }
+
+   
+   public void testValidator111() {	   
+      BufferedReader reader;
+      UrlValidator validator = new UrlValidator();
+		try {
+			// 100 urls in this file
+			reader = new BufferedReader(new FileReader(
+					"/Users/James/Documents/OSU_CS/362/final_local/CS362-U2019/FinalProject/URLValidatorInCorrect/src/goodURLs.txt"));
+			String line = reader.readLine();
+			int goodList = 1;
+			int i = 0;
+			while (i < 100) {
+				// read next line
+				//System.out.println(line);
+				if (!validator.isValid(line))
+				{
+					goodList = 0;
+					System.out.println("ERROR: valid URL rejected: " + line);
+				}				
+				i++;
+				line = reader.readLine();
+			}
+			assertTrue(goodList == 1);
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			// 100 urls in this file
+			reader = new BufferedReader(new FileReader(
+					"/Users/James/Documents/OSU_CS/362/final_local/CS362-U2019/FinalProject/URLValidatorInCorrect/src/badURLs.txt"));
+			String line = reader.readLine();
+			int badList = 1;
+			int i = 0;
+			while (i < 100) {
+				// read next line
+				//System.out.println(line);
+				if (validator.isValid(line))
+				{
+					badList = 0;
+					System.out.println("ERROR: invalid URL accepted: " + line);
+				}				
+				i++;
+				line = reader.readLine();
+			}
+			assertTrue(badList == 1);
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
    }
 
    public void testIsValid() {
